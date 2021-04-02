@@ -1,6 +1,5 @@
 const path = require('path');
 
-
 module.exports = {
   entry: './src/js/index.js',
   output: {
@@ -12,7 +11,12 @@ module.exports = {
     rules: [
       {
         test: /\.(scss|css)$/i,
-        use: ['style-loader', 'css-loader', "resolve-url-loader", "sass-loader",],
+        use: [  
+          'style-loader',
+          'css-loader',
+          'resolve-url-loader',
+          'sass-loader'
+        ],
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
