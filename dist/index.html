@@ -6,8 +6,244 @@
 
   </head>
   <body>
-    <header>To do list</header>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam id, consequatur quas tempore delectus itaque consequuntur corrupti iure aut distinctio doloribus? Necessitatibus animi molestias quasi voluptas mollitia amet officia, alias voluptatibus voluptates magnam. Ullam, dignissimos unde! Veritatis, inventore accusantium cumque itaque voluptatibus ab ducimus rerum autem? Nulla, perferendis saepe cumque commodi ex pariatur ab, sequi odio, aliquid totam corporis consectetur recusandae id consequuntur doloribus mollitia a quo quod? Unde, optio! Cum magni earum nobis repudiandae architecto aut voluptatem numquam in qui, praesentium, eum nesciunt eius autem facere doloribus, ut et soluta reprehenderit minus fugiat iure distinctio animi ipsa. Eligendi, vero.</p>
+    <header>
+      <div class='icon'>Home</div>
+      <div class='icon'>List</div>
+      <div class='icon'>Completed</div>
+      <div class='icon'>Attribute</div>
+    </header>
+    <main>
+        <div class='list-container'>
+          <div class='list-nav'>
+            <h1 class="list-heading">To Do list</h1>
+            <div class='list-sort'>Sort by</div>
+          </div>
+
+          <div class='list-content'>
+            <!--overdue -->
+            <div data-date='overdue'>
+              <div class='section-wrapper'>
+                <h2 class='task-heading'>Overdue</h2>
+                <ul data-date-list="overdue" class='task_list'>
+                  <li class='task_list_item'>
+                      <div class='item_title'>Find A new Book To Read</div>
+                      <div class='item_tools'>
+                        <div class='item_due-overdue'>Due Yesterday</div>
+                        <div class='item_edit'><img class='edit-icon' src='/src/images/edit.svg'></div>
+                    </div>
+                  </li>
+    
+                  <li class='plus_add_button'>
+                      <img class='plus-icon' src='/src/images/plus.svg'>
+                      <div class='item_title add_task'>Add task</div>
+                  </li>
+
+             
+          
+                  </li>
+                </ul>
+              </div>
+            </div>
+ 
+            
+
+            <!-- Due Today -->
+            <div data-date="today">
+              <div class="section-wrapper">
+                <h2 class='task-heading'>Today</h2>
+                <ul data-date-list="today" class='task_list'>
+                  <li class='task_list_item'>
+                    <div class='item_title'>Find A new Book To Read</div>
+                    <div class='item_tools'>
+                      <div class='item_due-today'>Due Today</div>
+                      <div class='item_edit'><img class='edit-icon' src='/src/images/edit.svg'></div>
+                  </div>
+                  </li>
+                  <li class='task_list_item'>
+                    <div class='item_title'>Find A new Book To Read</div>
+                    <div class='item_tools'>
+                      <div class='item_due-today'>Due Today</div>
+                      <div class='item_edit'><img class='edit-icon' src='/src/images/edit.svg'></div>
+                  </div>
+                  </li>
+                  <li class='task_list_item'>
+                    <div class='item_title'>Find A new Book To Read</div>
+                    <div class='item_tools'>
+                      <div class='item_due-today'>Due Today</div>
+                      <div class='item_edit'><img class='edit-icon' src='/src/images/edit.svg'></div>
+                  </div>
+                  </li>
+                  <li class='task_list_item'>
+                    <div class='item_title'>Find A new Book To Read</div>
+                    <div class='item_tools'>
+                      <div class='item_due-today'>Due Today</div>
+                      <div class='item_edit'><img class='edit-icon' src='/src/images/edit.svg'></div>
+                  </div>
+                  </li>
+                  <li class='task_list_item'>
+                    <div class='item_title'>Find A new Book To Read</div>
+                    <div class='item_tools'>
+                      <div class='item_due-today'>Due Today</div>
+                      <div class='item_edit'><img class='edit-icon' src='/src/images/edit.svg'></div>
+                  </div>
+                  </li>
+                  <li class='plus_add_button'>
+                    <img class='plus-icon' src='/src/images/plus.svg'>
+                    <div class='item_title add_task'>Add task</div>
+                  </li>
+                </ul>
+              </div>
+            
+            </div>
+             
+
+            <!-- Due Tomorrow -->
+            <div data-date="tomorrow">
+              <div class="section-wrapper">
+                <h2  class='task-heading'>Tomorrow</h2>
+                <ul data-date-list="tomorrow" class='task_list'>
+                  <li class='task_list_item'>
+                      <div class='item_title'>Find A new Book To Read</div>
+                      <div class='item_tools'>
+                        <div class='item_due-someday'>Due Tomorrow</div>
+                        <div class='item_edit'><img class='edit-icon' src='/src/images/edit.svg'></div>
+                    </div>
+                  </li>
+                  <li class='task_list_item'>
+                      <div class='item_title'>Find A new Book To Read</div>
+                      <div class='item_tools'>
+                        <div class='item_due-someday'>Due Tomorrow</div>
+                        <div class='item_edit'><img class='edit-icon' src='/src/images/edit.svg'></div>
+                    </div>
+                  </li>
+                  <li class='task_list_item'>
+                      <div class='item_title'>Find A new Book To Read</div>
+                      <div class='item_tools'>
+                        <div class='item_due-someday'>Due Tomorrow</div>
+                        <div class='item_edit'><img class='edit-icon' src='/src/images/edit.svg'></div>
+                    </div>
+                  </li>
+                  <li class='task_list_item'>
+                      <div class='item_title'>Find A new Book To Read</div>
+                      <div class='item_tools'>
+                        <div class='item_due-someday'>Due Tomorrow</div>
+                        <div class='item_edit'><img class='edit-icon' src='/src/images/edit.svg'></div>
+                    </div>
+                  </li>
+                  <li class='task_list_item'>
+                      <div class='item_title'>Find A new Book To Read</div>
+                      <div class='item_tools'>
+                        <div class='item_due-someday'>Due Tomorrow</div>
+                        <div class='item_edit'><img class='edit-icon' src='/src/images/edit.svg'></div>
+                    </div>
+                  </li>
+                  <li class='task_list_item'>
+                      <div class='item_title'>Find A new Book To Read</div>
+                      <div class='item_tools'>
+                        <div class='item_due-someday'>Due Tomorrow</div>
+                        <div class='item_edit'><img class='edit-icon' src='/src/images/edit.svg'></div>
+                    </div>
+                  </li>
+                  <li class='plus_add_button'>
+                    <img class='plus-icon' src='/src/images/plus.svg'>
+                    <div class='item_title add_task'>Add task</div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Due This Week -->
+            <div data-date="week">
+              <div class="section-wrapper">
+                <h2  class='task-heading'>This Week</h2>
+                <ul data-date-list="week" class='task_list'>
+                  <li class='task_list_item'>
+                      <div class='item_title'>Find A new Book To Read</div>
+                      <div class='item_tools'>
+                        <div class='item_due-someday'>Due Friday</div>
+                        <div class='item_edit'><img class='edit-icon' src='/src/images/edit.svg'></div>
+                    </div>
+                  </li>
+                  <li class='plus_add_button'>
+                    <img class='plus-icon' src='/src/images/plus.svg'>
+                    <div class='item_title add_task'>Add task</div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Due This Month -->
+            <div data-date="month">
+              <div class="section-wrapper">
+                <h2  class='task-heading'>This Month</h2>
+                <ul data-date-list="month" class='task_list'>
+                  <li class='task_list_item'>
+                      <div class='item_title'>Find A new Book To Read</div>
+                      <div class='item_tools'>
+                        <div class='item_due-someday'>Due 4/14/21</div>
+                        <div class='item_edit'><img class='edit-icon' src='/src/images/edit.svg'></div>
+                    </div>
+                  </li>
+                  <li class='plus_add_button'>
+                    <img class='plus-icon' src='/src/images/plus.svg'>
+                    <div class='item_title add_task'>Add task</div>
+                  </li>
+                
+                </ul>
+              </div>
+            </div>
+
+            <!-- Due Someday -->
+            <div data-date="someday">
+              <div class="section-wrapper">
+                <h2  class='task-heading'>Some Day</h2>
+                <ul data-date-list="overdue" class='task_list'>
+                  <li class='task_list_item'>
+                      <div class='item_title'>Find A new Book To Read</div>
+                      <div class='item_tools'>
+                        <div class='item_due-someday'>Due 6/21/21</div>
+                        <div class='item_edit'><img class='edit-icon' src='/src/images/edit.svg'></div>
+                    </div>
+                  </li>
+                  <li class='plus_add_button'>
+                    <img class='plus-icon' src='/src/images/plus.svg'>
+                    <div class='item_title add_task'>Add task</div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+        </div>
+    </main>
     <script src="main.js"></script>
   </body>
 </html>
+
+
+<!-- <div class="left-sidebar">
+  <div class="home"></div>
+  <div class="project"></div>
+</div>
+<div class='editor'>
+  <div class='content-title'>Project Weibo</div>
+    <div class='list-content'>
+      <ul class='list-box'>
+        <li class='task_list_item'>
+          <div class='task_list_item_content add_task'>
+            <span class='plus-icon'><img class='icon' src="../src/images/plus.png"></span>
+            <span class='task-title'>Add A Task</span>
+    
+          </div>
+        </li>
+        <li class='task_list_item'>
+          <div class='task_list_item_content add_task'>
+            <span class='task-title'>Item One</span>
+            <span class="menu">asd</span>
+            <span class="edit">asd</span>
+          </div>
+
+        </li>
+      </ul>
+  </div>
+</div> -->

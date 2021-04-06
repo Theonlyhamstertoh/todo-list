@@ -1,4 +1,153 @@
+@use "header";
+@use "sidebar";
+@use "main";
+@use "base";
+@use "utility";
+@use "mediaqueries";
+@use "var";
+@use "mixin";
+
 header {
-    background-color: green;
-    font-size: 10em;
+    position: fixed;
+    align-items: center;
+    padding: 40px 25px;
+    gap: 20px;
+    @include mixin.flex-column;
+    width: var.$heading-width;
+    height: 100vh;
+    background-color: var.$heading-color;
+
+    .icon {
+        @include mixin.flex-center(row, center);
+        width: 40px;
+        height: 40px;
+        background-color: #555;
+        filter: grayscale(100%);
+    }
+}
+
+main {
+    margin-left: var.$heading-width;
+    width: calc(100vw - #{var.$heading-width});
+    height: 100vh;
+    background-color: var.$main-color;
+    overflow-y: hidden;
+
+ 
+}
+
+.list-container {
+    padding: 0px 100px 100px 100px;
+    height: 100%;
+    overflow: auto;
+
+}
+.list-nav {
+    color: var.$listHeading-color;
+    padding: 40px 0 10px 0;
+    @include mixin.flex-center(row, space-between);
+    align-items: center;
+    border-bottom: var.$borderbottom-color;
+
+    .list-heading {
+        @include mixin.big-title;
+    }
+    .list-sort {
+        padding-right: 20px;
+        cursor: pointer;
+    }
+ 
+ 
+}
+
+
+.list-content {
+    padding-top: 15px;
+    color: var.$taskTitle-color;
+    user-select: none;
+    .task-heading {
+        @include mixin.med-title;
+        padding-bottom: 5px;
+    }
+
+    .task_list {
+        margin-bottom: 30px;
+    }
+}  
+
+.task_list_item {
+    @include mixin.task_list_item;
+    @include mixin.flex-center(row, space-between);
+    position: relative;
+    width: 100%;
+    height: 45px;
+    &:hover {
+        text-decoration: line-through;
+        cursor: pointer;
+        
+    }
+    .item_title {
+        font-size: var.$normal-size;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden
+    }
+    .item_tools {
+        @include mixin.flex-center(row, center);
+    }
+
+   
+    
+}
+
+.plus_add_button {
+    @include mixin.flex-center(row, initial);
+    gap: 5px;
+    cursor: pointer;
+    padding-bottom: 5px;
+    user-select: none;
+    color: var.$placeholder-color;
+    &:hover {
+        color: var.$buttonText-color;
+        .plus-icon {
+            border-radius: 50px;
+            background-color: var.$plusIcon-color;
+        }
+    }
+    .plus-icon {
+        width: 20px;
+        height: 20px;
+        pointer-events: none
+    }
+    .add_task {
+        pointer-events: none
+    }
+}
+
+
+.edit_top {
+    @include mixin.task_list_item;
+}
+
+
+.edit_extra {
+    @include mixin.flex-center(row, space-between);
+    .edit_tools {
+        @include mixin.flex-center(row, initial);
+        margin: 10px 0;
+        gap: 10px;
+    
+        .edit_icon {
+            width: 70px;
+            height: 20px;
+            background-color: #555;
+        }
+    }
+}
+
+
+.edit_buttons_container {
+    @include mixin.flex-center(row, initial);
+    
+    gap: 10px;
 }
