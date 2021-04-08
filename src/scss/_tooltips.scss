@@ -1,0 +1,21 @@
+@use "var";
+@use "mixin";
+
+
+.popper  {
+    position: absolute;
+    right: -40px;
+    top: 30px;
+    // visibility: hidden;
+    background-color: #121212;
+    padding: 10px;
+    .drop_down_menu {
+        display: flex;
+        justify-content: flex-start;
+        flex-direction:  column;
+
+
+        
+        
+    }
+}

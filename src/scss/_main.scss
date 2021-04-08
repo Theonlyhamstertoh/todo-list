@@ -1,2 +1,13 @@
 @use "var";
 @use "mixin";
+
+
+main {
+    margin-left: var.$heading-width;
+    width: calc(100vw - #{var.$heading-width});
+    height: 100vh;
+    background-color: var.$main-color;
+    overflow-y: hidden;
+
+ 
+}

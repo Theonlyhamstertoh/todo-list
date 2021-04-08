@@ -21,18 +21,9 @@
     background-color: var.$task-dateColor3;
 }
 
-.edit-icon {
-    position: absolute;
-    top: 45%;
-    right: -46px;
-    transform: translate(-50%, -50%);
-    width: 20px;
-    height: 20px;
-    margin-top: 5px;
-    cursor: pointer;
-}
 
-.edit_title {
+
+.form_title {
     @include mixin.remove_border-outline;
     font-size: var.$normal-size;
     color: var.$taskTitle-color;

@@ -1,0 +1,23 @@
+@use "var";
+@use "mixin";
+
+.form_top {
+    @include mixin.task_list_item;
+}
+
+
+.form_extra {
+    @include mixin.flex-center(row, space-between);
+    .form_tools {
+        @include mixin.flex-center(row, initial);
+        margin: 10px 0;
+        gap: 10px;
+    
+        .form_icon {
+            height: 20px;
+            @include mixin.remove_border-outline;
+            background-color: #555;
+            color: var.$taskTitle-color
+        }
+    }
+}
