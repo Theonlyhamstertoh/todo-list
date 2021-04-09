@@ -5,6 +5,19 @@
     @include mixin.task_list_item;
 }
 
+.form_title {
+    // @include mixin.remove_border-outline;
+    font-size: var.$normal-size;
+    color: var.$taskTitle-color;
+    width: 100%;
+    resize: vertical;
+    border: none;
+    background-color: transparent;
+    height: 100%;
+    cursor: text;
+    word-wrap: break-word;
+    outline: none;
+}
 
 .form_extra {
     @include mixin.flex-center(row, space-between);

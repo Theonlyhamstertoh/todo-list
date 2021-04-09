@@ -23,14 +23,7 @@
 
 
 
-.form_title {
-    @include mixin.remove_border-outline;
-    font-size: var.$normal-size;
-    color: var.$taskTitle-color;
-    width: 100%;
-    height: 100%;
-    cursor: text;
-}
+
 
 .subtask {
     padding-left: 20px;

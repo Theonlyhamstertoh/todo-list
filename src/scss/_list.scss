@@ -46,7 +46,6 @@
     height: 45px;
     &:hover {
 
-        
     }
     .item_title {
         font-size: var.$normal-size;
@@ -60,6 +59,10 @@
     .item_tools {
         @include mixin.flex-center(row, center);
         gap: 2px;
+
+        .item_due {
+            margin-right: 7px;
+        }
         .edit_icon {
             width: 20px;
             height: 20px;

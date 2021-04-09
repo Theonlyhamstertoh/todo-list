@@ -1,5 +1,7 @@
 import * as htmlTag from "../html-tags";
 import {addTask} from "./task";
+import {chooseDate} from "./formatDate";
+
 const showForm = (() => {
     let IsFormEnabled = null;
     const getIsFormEnabled = () => {
@@ -22,30 +24,35 @@ const showForm = (() => {
         
         //add event listeners to the buttons of edit Form.
         const task_title = newForm.querySelector('.form_title');
-        const task_dueDate = newForm.querySelector("input[type='date']");
-        const task_color = newForm.querySelector("[name='color']");
+        const date_Wrapper = newForm.querySelector(".date_Wrapper");
         const form_add_button = newForm.lastChild.childNodes[1];
         const form_cancel_button = newForm.lastChild.childNodes[3];
-        const task_importance = newForm.querySelector('[name="importance"]');
+
+        // const task_color = newForm.querySelector("[name='color']");
+        // const task_importance = newForm.querySelector('[name="importance"]');
         form_cancel_button.addEventListener("click", remove);
         form_add_button.addEventListener("click", addTask.create);
-        task_title.focus();
+
         // update formEnabled so that only one edit form can exist in the webpage
         updateIsFormEnabled(true);
         // store formInfo (title, date, etc) so it can be accessed later
+       
+
+        // listen 
+        const dateInput = document.querySelector('.datepicker-input');
+        const date_value = document.querySelector('.date_value');
+        dateInput.addEventListener('change', chooseDate.updateFormDate)
+
         formLocation.store_Info(
             dateSection, 
             form_add_button, 
             form_cancel_button, 
             newForm, 
             task_title,
-            task_dueDate, 
-            task_importance,
-            task_color,
+            date_value,
+   
         );
         
-        // initial disable
-        addTaskButton.disable();
         // enable button if user input text is greater than one. Disable button if not.
         formLocation.get_Info().task_title.addEventListener('input', (e) => {
             const title = e.target.value;
@@ -55,9 +62,15 @@ const showForm = (() => {
                 addTaskButton.disable();
             }
         })
+
+        // initialilize
+        addTaskButton.disable();
+        task_title.focus();
+
         
         // listens for keypress so that "enter" and "cancel" key works
         window.addEventListener("keydown", detectKeyPress);
+    
     }
 
     // removes the event listeners, the elements, and recreate addTask button. 
@@ -128,7 +141,7 @@ const detectKeyPress = (e) => {
 // retrieve location of the form and then be able to delete it
 const formLocation = (() => {
     let formInfo = {};
-    const store_Info = (dateSection, form_add_button, form_cancel_button, newForm, task_title, task_dueDate, task_importance, task_color) => {
+    const store_Info = (dateSection, form_add_button, form_cancel_button, newForm, task_title, task_dueDate) => {
         formInfo = {
             dateSection,
             form_add_button,
@@ -136,8 +149,6 @@ const formLocation = (() => {
             newForm,
             task_title,
             task_dueDate,
-            task_importance,
-            task_color
         }
         return formInfo;
     }

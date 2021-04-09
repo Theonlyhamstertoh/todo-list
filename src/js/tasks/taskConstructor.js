@@ -2,36 +2,34 @@ import {formLocation} from "./showForm";
 import * as htmlTag from "../html-tags";
 
 class Task {
-    constructor(title, dueDate='No Date', importance='none') {
-        this._id = new Date().getTime();
-        this._title = title;
-        this._dueDate = dueDate; 
-        this._importance = importance;
+    constructor(theTitle, dueDate='No Date') {
+        this.id = new Date().getTime();
+        this.title = theTitle;
     }
 
-    set title(newTitle) {
-        this._title = newTitle;
+    set theTitle(newTitle) {
+        this.title = newTitle;
     }
 
-    get title() {
-        return this._title;
+    get theTitle() {
+        return this.title;
     }
 
     set date(newDueDate) {
-        this._dueDate = newDueDate; 
+        this.dueDate = newDueDate; 
     }
 
     get date() {
-        return this._dueDate;
+        return this.dueDate;
     }
 
     get importance() {
-        return this._importance;
+        return this.importance;
       }
 
     set importance(value) {
         if (value) {
-            this._importance = value;
+            this.importance = value;
         }
     }
 
@@ -40,13 +38,13 @@ class Task {
         const dateSection = formLocation.get_Info().dateSection;
         
         const newTask = document.createElement('li');
-        newTask.dataset.id = this._id;
+        newTask.dataset.id = this.id;
         newTask.classList.add('task_list_item');
 
         const taskHTML = document.createRange()
             .createContextualFragment(
                 htmlTag.task(
-                    this._title, this._dueDate
+                    this.title
                 ));
     
         //apending the class to webpage
