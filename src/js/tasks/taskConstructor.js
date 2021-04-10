@@ -22,7 +22,7 @@ class Task {
     }
 
     set theTitle(newTitle) {
-        this._title = newTitle;
+        this.title = newTitle;
     }
 
     get theTitle() {

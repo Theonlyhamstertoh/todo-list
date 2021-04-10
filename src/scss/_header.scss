@@ -1,21 +1,2 @@
 @use "var";
 @use "mixin";
-
-header {
-    position: fixed;
-    align-items: center;
-    padding: 40px 25px;
-    gap: 20px;
-    @include mixin.flex-column;
-    width: var.$heading-width;
-    height: 100vh;
-    background-color: var.$heading-color;
-
-    .icon {
-        @include mixin.flex-center(row, center);
-        width: 40px;
-        height: 40px;
-        background-color: #555;
-        filter: grayscale(100%);
-    }
-}

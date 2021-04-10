@@ -25,6 +25,7 @@
         @include mixin.flex-center(row, initial);
         margin: 10px 0;
         gap: 10px;
+        
     
         .form_icon {
             height: 20px;
@@ -33,4 +34,8 @@
             color: var.$taskTitle-color
         }
     }
+}
+
+.form_bottom {
+    margin-bottom: 15px;
 }

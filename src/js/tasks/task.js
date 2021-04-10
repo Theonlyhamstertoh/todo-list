@@ -29,6 +29,9 @@ const addTask = (() => {
         create,
     }
 })()
+const editTask = (TheTaskObject) => {
+    createObject(TheTaskObject.id, TheTaskObject.theTitle, TheTaskObject.date);
+};
 
 const createObject = (id, title, date) => {
     const form_wrapper = formLocation.get_Info().newForm;
@@ -51,10 +54,7 @@ const createObject = (id, title, date) => {
     dateSection.insertBefore(newTask, form_wrapper)
 }
 
-const editTask = (() => {
 
-
-})();
 const deleteTask = (e) => {
     const neededElement = getTask(e);
     taskArray.splice(taskArray.indexOf(neededElement), 1);
@@ -122,4 +122,4 @@ const dragTask = (() => {
 })()
 
 
-export {addTask, taskArray, deleteTask, markCompleteTask, hideSection, getTask};
+export {addTask, taskArray, deleteTask, markCompleteTask, hideSection, getTask, editTask};

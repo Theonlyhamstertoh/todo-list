@@ -4,10 +4,16 @@ import {addTask, taskArray, getTask, deleteTask, markCompleteTask, hideSection} 
 const buttonHandler = (e) => {
 
     if(e.target.classList.contains("plus_add_button")) {
+        if(showForm.getIsEditModeEnable()) {
+            const previousObject = formLocation.get_Info().theElementObject;
+            addTask.create(previousObject.theTitle, previousObject.date);
+            showForm.updateIsEditModeEnable(false);
+            showForm.remove();
+        }
         if(showForm.getIsFormEnabled() === true) {
             showForm.remove();
             addTaskButton.create(formLocation.get_Info().dateSection);
-        } 
+        }
         showForm.create(e.target.parentNode);
         addTaskButton.remove(e.target);
     }
@@ -17,14 +23,29 @@ const buttonHandler = (e) => {
     }
 
     if(e.target.classList.contains('edit_icon')) {
+        if(showForm.getIsEditModeEnable()) {
+            const previousObject = formLocation.get_Info().theElementObject;
+            addTask.create(previousObject.theTitle, previousObject.date);
+            showForm.updateIsEditModeEnable(false);
+            showForm.remove();
+        }
+
         const theElementObject = getTask(e); 
         const theElement = e.target.parentNode.parentNode;
         const dateSection = e.target.parentNode.parentNode.parentNode;
+
+        if(dateSection.querySelector('.plus_add_button') === null) {
+            addTaskButton.create(dateSection);
+        }
+
         if(showForm.getIsFormEnabled() === true) {
             showForm.remove();
 
         } 
-        showForm.create(dateSection, true, theElement, theElementObject);
+
+
+        showForm.updateIsEditModeEnable(true);
+        showForm.create(dateSection, theElement, theElementObject);
         theElement.remove();
     }
     if(e.target.classList.contains('task-heading')) {

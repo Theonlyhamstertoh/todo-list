@@ -3,8 +3,7 @@
 
 
 main {
-    margin-left: var.$heading-width;
-    width: calc(100vw - #{var.$heading-width});
+    width: 100vw;
     height: 100vh;
     background-color: var.$main-color;
     overflow-y: hidden;

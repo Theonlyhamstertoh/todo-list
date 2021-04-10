@@ -5,7 +5,10 @@
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack"
+    "build": "webpack",
+    "serve": "webpack serve",
+    "start": "webpack serve --open",
+    "start:hotdev": "webpack-dev-server --hot"
   },
   "repository": {
     "type": "git",
@@ -21,12 +24,16 @@
   "dependencies": {
     "css-loader": "^5.2.0",
     "date-fns": "^2.19.0",
+    "html-loader": "^2.1.2",
     "resolve-url-loader": "^3.1.2",
     "sass": "^1.32.8",
     "sass-loader": "^11.0.1",
     "style-loader": "^2.0.0",
     "webpack": "^5.28.0",
-    "webpack-cli": "^4.6.0"
+    "webpack-cli": "^4.6.0",
+    "webpack-dev-server": "^3.11.2"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "file-loader": "^6.2.0"
+  }
 }

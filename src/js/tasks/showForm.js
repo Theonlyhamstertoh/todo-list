@@ -1,5 +1,5 @@
 import * as htmlTag from "../html-tags";
-import {addTask} from "./task";
+import {addTask, taskArray, deleteTask, editTask} from "./task";
 import {chooseDate, formatDate} from "./formatDate";
 import { buttonHandler } from "../domController";
 
@@ -12,7 +12,15 @@ const showForm = (() => {
         return value === true ? IsFormEnabled = true : IsFormEnabled = false;
     }
 
-    const create = (dateSection, isItInEditMode, editElement, theElementObject) => {
+    let editModeEnabled = null;
+    const getIsEditModeEnable = () => {
+        return editModeEnabled;
+    }
+    const updateIsEditModeEnable = (value) => {
+        return value === true ? editModeEnabled = true : editModeEnabled = false;
+    }
+
+    const create = (dateSection, editElement, theElementObject) => {
         const newForm = document.createElement('li');
         newForm.classList.add('form_wrapper');
         
@@ -55,6 +63,7 @@ const showForm = (() => {
             task_title,
             dateInput,
             date_value,
+            theElementObject,
    
         );
         // initialilize
@@ -68,29 +77,43 @@ const showForm = (() => {
 
         // listens for keypress so that "enter" and "cancel" key works
         window.addEventListener("keydown", detectKeyPress);
-        if(isItInEditMode === true) {
-            console.log(theElementObject)
+
+        if(getIsEditModeEnable()) {
             addTaskButton.enable();
             task_title.value = theElementObject.theTitle;
+
             if(theElementObject.date !== '') {
                 date_value.textContent = chooseDate(theElementObject.date);
                 dateInput.value = theElementObject.date;
             }
+
             editElement.insertAdjacentElement("afterend", newForm);
             task_title.focus();
-            form_cancel_button.addEventListener('click', () => {
-                remove();
-                addTask.create(task_title.value, dateInput.value)
 
+            form_cancel_button.addEventListener('click', () => {
+                addTask.create(theElementObject.theTitle, theElementObject.date);
+                updateIsEditModeEnable(false);
+                remove();
             })
+
+            form_add_button.addEventListener("click", () => {
+                theElementObject.theTitle =task_title.value;
+                theElementObject.date =dateInput.value;
+                updateIsEditModeEnable(false);
+                editTask(theElementObject);
+                remove();
+            });
+
+            
         } else {
             form_cancel_button.addEventListener("click", () => {
                 remove();
                 addTaskButton.create(formLocation.get_Info().dateSection);
     
             });
+            form_add_button.addEventListener("click", addTaskButtonHandler);
         }
-        form_add_button.addEventListener("click", addTaskButtonHandler);
+
         task_title.addEventListener('input', () => {
             if(task_title.value.length > 0) {
                 addTaskButton.enable();
@@ -101,9 +124,7 @@ const showForm = (() => {
 
     }
 
-    const checkIfInEditMode = () => {
 
-    }
     const addTaskButtonHandler = () => {
         const task_title = document.querySelector('.form_title');
         const date_Input = document.querySelector('.datepicker-input');
@@ -136,6 +157,8 @@ const showForm = (() => {
         create, 
         updateIsFormEnabled, 
         getIsFormEnabled,  
+        updateIsEditModeEnable,
+        getIsEditModeEnable,
         remove,
         addTaskButtonHandler
     }
@@ -179,10 +202,31 @@ const detectKeyPress = (e) => {
     const dateInput = document.querySelector('.datepicker-input');
 
     if(e.key === "Escape") {
-        showForm.remove();
-        addTaskButton.create(formLocation.get_Info().dateSection);
+        const theElementObject = formLocation.get_Info().theElementObject;
+        if(showForm.getIsEditModeEnable()) {
+            addTask.create(theElementObject.theTitle, theElementObject.date);
+            showForm.updateIsEditModeEnable(false);
+            showForm.remove();
+        } else {
+            showForm.remove();
+            addTaskButton.create(formLocation.get_Info().dateSection);
+        }
     } else if(e.key === 'Enter' && task_title.value.length > 0 ) {
-        showForm.addTaskButtonHandler();
+        const theElementObject = formLocation.get_Info().theElementObject;
+        if(theElementObject !== undefined) {
+            console.log(theElementObject)
+            theElementObject.theTitle =task_title.value;
+            theElementObject.date =dateInput.value;
+            showForm.updateIsEditModeEnable(false);
+            editTask(theElementObject);
+            showForm.remove()
+        } else {
+            showForm.addTaskButtonHandler();
+
+        }
+
+
+        
 
     }
 }
@@ -190,7 +234,7 @@ const detectKeyPress = (e) => {
 // retrieve location of the form and then be able to delete it
 const formLocation = (() => {
     let formInfo = {};
-    const store_Info = (dateSection, form_add_button, form_cancel_button, newForm, task_title, task_dueDate, date_value) => {
+    const store_Info = (dateSection, form_add_button, form_cancel_button, newForm, task_title, task_dueDate, date_value, theElementObject) => {
         formInfo = {
             dateSection,
             form_add_button,
@@ -199,6 +243,7 @@ const formLocation = (() => {
             task_title,
             task_dueDate,
             date_value,
+            theElementObject
         }
         return formInfo;
     }
