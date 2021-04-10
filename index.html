@@ -23,9 +23,13 @@
             <!--overdue -->
             <div data-date='overdue'>
               <div class='section-wrapper'>
-                <h2 class='task-heading'>Overdue</h2>
+                <h2 class='task-heading'>
+                  <span class="section-title">Overdue</span>
+                  <span class="show_completed_task_icon">&#171;</span>
+                </h2>
                 <ul data-date-list="overdue" class='task_list'>
                   <li class='task_list_item'>
+                      <div class='item_check'><span class='checkmark'>&#10003;</span></div>
                       <div class='item_title'>Find A new Book To Read</div>
                       <div class='item_tools'>
                         <div class='item_due-overdue'>Due Yesterday</div>
@@ -51,7 +55,10 @@
             <!-- Due Today -->
             <div data-date="today">
               <div class="section-wrapper">
-                <h2 class='task-heading'>Today</h2>
+                <h2 class='task-heading'>
+                  <span class="section-title">Today</span>
+                  <span class="show_completed_task_icon">&#171;</span>
+                </h2>
                 <ul data-date-list="today" class='task_list'>
                   <li class='plus_add_button'>
                     <img class='plus-icon' src='/src/images/plus.svg'>
@@ -66,7 +73,10 @@
             <!-- Due Tomorrow -->
             <div data-date="tomorrow">
               <div class="section-wrapper">
-                <h2  class='task-heading'>Tomorrow</h2>
+                <h2  class='task-heading'>
+                  <span class="section-title">Tomorrow</span>
+                  <span class="show_completed_task_icon">&#171;</span>
+                </h2>
                 <ul data-date-list="tomorrow" class='task_list'>
                   <li class='plus_add_button'>
                     <img class='plus-icon' src='/src/images/plus.svg'>
@@ -79,7 +89,10 @@
             <!-- Due This Week -->
             <div data-date="week">
               <div class="section-wrapper">
-                <h2  class='task-heading'>This Week</h2>
+                <h2  class='task-heading'>
+                  <span class="section-title">This Week</span>
+                  <span class="show_completed_task_icon">&#171;</span>
+                </h2>
                 <ul data-date-list="week" class='task_list'>
                   <li class='plus_add_button'>
                     <img class='plus-icon' src='/src/images/plus.svg'>
@@ -92,7 +105,10 @@
             <!-- Due This Month -->
             <div data-date="month">
               <div class="section-wrapper">
-                <h2  class='task-heading'>This Month</h2>
+                <h2  class='task-heading'>
+                  <span class="section-title">This Month</span>
+                  <span class="show_completed_task_icon">&#171;</span>
+                </h2>
                 <ul data-date-list="month" class='task_list'>
                   <li class='plus_add_button'>
                     <img class='plus-icon' src='/src/images/plus.svg'>
@@ -106,7 +122,10 @@
             <!-- Due Someday -->
             <div data-date="someday">
               <div class="section-wrapper">
-                <h2  class='task-heading'>Some Day</h2>
+                <h2  class='task-heading'>
+                  <span class="section-title">Some Day</span>
+                  <span class="show_completed_task_icon">&#171;</span>
+                </h2>
                 <ul data-date-list="overdue" class='task_list'>
                   <li class='plus_add_button'>
                     <img class='plus-icon' src='/src/images/plus.svg'>
@@ -114,6 +133,20 @@
                   </li>
                 </ul>
               </div>
+            </div>
+
+            <div data-type="completed">
+              <div class="section-wrapper">
+                <h2 class='task-heading' >
+                  <span class="section-title">Completed</span>
+                  <span class='total_completed_tasks'>(0)</span>
+                  <span class="show_completed_task_icon">&#171;</span>
+                </h2>
+                
+                <ul data-date-list="completed" class='task_list'>
+                </ul>
+              </div>
+            
             </div>
 
           </div>
