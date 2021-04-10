@@ -1,3 +1,5 @@
+import { chooseDate } from "./tasks/formatDate";
+
 const form = `
 <div class="form_top">
 <div class='form_input'>
@@ -28,17 +30,18 @@ const addTaskButton = `
     <div class='item_title add_task'>Add task</div>
 `
 
-const task = (title = 'No Title Given', dateStyleType = 'item_due-today', date = "Today") => {
-    const taskHTML = `
-        <div class='item_title'>${title}</div>
-            <div class='item_tools'>
-            <div class='item_due'>Due ${date}</div>
-            <img class='edit_icon' src='/src/images/task_edit_icon.svg'>
-            <img class='delete_icon' src='/src/images/trash.svg'>
+const task = (title, date) => {
+  const taskHTML = `
+      <div class='item_check'><span class='checkmark'>&#10003;</span></div>
+      <div class='item_title'>${title}</div>
+          <div class='item_tools'>
+          <div class='item_due'>${chooseDate(date)}</div>
+          <img class='edit_icon' src='/src/images/task_edit_icon.svg'>
+          <img class='delete_icon' src='/src/images/trash.svg'>
 
 
-        </div>`
-    
-    return taskHTML;
+      </div>`
+  
+  return taskHTML;
 }
 export {form, addTaskButton, task};

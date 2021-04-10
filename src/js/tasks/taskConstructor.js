@@ -1,14 +1,28 @@
 import {formLocation} from "./showForm";
 import * as htmlTag from "../html-tags";
+import { chooseDate } from "./formatDate";
 
 class Task {
-    constructor(theTitle, dueDate='No Date') {
+    constructor(theTitle, dueDate) {
         this.id = new Date().getTime();
         this.title = theTitle;
+        this.dueDate = dueDate;
+        this.completed = false;
+    }
+    set completed(newValue) {
+        this._completed = newValue;
+    }
+
+    getId() {
+        return this.id;
+    }
+
+    get completed() {
+        return this.completed;
     }
 
     set theTitle(newTitle) {
-        this.title = newTitle;
+        this._title = newTitle;
     }
 
     get theTitle() {
@@ -22,45 +36,8 @@ class Task {
     get date() {
         return this.dueDate;
     }
-
-    get importance() {
-        return this.importance;
-      }
-
-    set importance(value) {
-        if (value) {
-            this.importance = value;
-        }
-    }
-
-    createObject() {
-        const form_wrapper = formLocation.get_Info().newForm;
-        const dateSection = formLocation.get_Info().dateSection;
-        
-        const newTask = document.createElement('li');
-        newTask.dataset.id = this.id;
-        newTask.classList.add('task_list_item');
-
-        const taskHTML = document.createRange()
-            .createContextualFragment(
-                htmlTag.task(
-                    this.title
-                ));
-    
-        //apending the class to webpage
-        newTask.appendChild(taskHTML);
-        dateSection.insertBefore(newTask, form_wrapper)
-    }
-
-    editObject() {
-
-    }
-
-
 }
 
-function _getID() {
-    return '_' + Math.random().toString(36).substr(2, 9);
-}
+
 
 export default Task;
