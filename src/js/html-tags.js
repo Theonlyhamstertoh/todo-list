@@ -1,5 +1,12 @@
 import { chooseDate } from "./tasks/formatDate";
+import plus from "../images/plus.svg";
+import edit from "../images/task_edit_icon.svg";
+import deleteIcon from "../images/trash.svg";
 
+const allImg = document.querySelectorAll("img");
+allImg.forEach(el => {
+  el.src = plus;
+})
 const form = `
 <div class="form_top">
 <div class='form_input'>
@@ -26,7 +33,7 @@ const form = `
 </div>`;
 
 const addTaskButton = `
-    <img class='plus-icon' src='/src/images/plus.svg'>
+    <img class='plus-icon' src='${plus}'>
     <div class='item_title add_task'>Add task</div>
 `
 
@@ -37,8 +44,8 @@ const task = (title, date) => {
       <div class='item_title'>${title}</div>
           <div class='item_tools'>
           <div class='item_due'>${chooseDate(date)}</div>
-          <img class='edit_icon' src='/src/images/task_edit_icon.svg'>
-          <img class='delete_icon' src='/src/images/trash.svg'>
+          <img class='edit_icon' src="${edit}">
+          <img class='delete_icon' src='${deleteIcon}'>
 
 
       </div>`
