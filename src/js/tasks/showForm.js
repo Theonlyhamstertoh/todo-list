@@ -139,17 +139,13 @@ const showForm = (() => {
     }
     // removes the event listeners, the elements, and recreate addTask button. 
     const remove = () => {
-        // remove all event listeners first
-        formLocation.get_Info().form_add_button.removeEventListener("click", addTaskButtonHandler);
-        formLocation.get_Info().form_cancel_button.removeEventListener("click", remove);
-        window.removeEventListener("keydown", detectKeyPress);
 
-        updateIsFormEnabled(false);
-        // remove from dom tree
-        formLocation.get_Info().newForm.remove();
-
-        // adds add_Task button back
+        if(showForm.getIsFormEnabled()) {
+            formLocation.get_Info().newForm.remove();
+            window.removeEventListener("keydown", detectKeyPress);
         
+            updateIsFormEnabled(false);
+        }
 
     }
 
@@ -173,7 +169,6 @@ const addTaskButton = (() => {
     const create = (dateSection) => {
         const newAddTaskBtn = document.createElement('li');
         newAddTaskBtn.classList.add('plus_add_button');
-
         // add the HTML append to NewAddTaskBtn
         const addTaskFragmentHTMl = document.createRange().createContextualFragment(htmlTag.addTaskButton);
         newAddTaskBtn.appendChild(addTaskFragmentHTMl);

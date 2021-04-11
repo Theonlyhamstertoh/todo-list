@@ -18,8 +18,12 @@
         @include mixin.big-title;
     }
     .list-sort {
-        padding-right: 20px;
         cursor: pointer;
+        user-select: none;
+        transition: all .3s;
+        &:hover {
+            transform: scale(1.1);
+        }
     }
 }
 

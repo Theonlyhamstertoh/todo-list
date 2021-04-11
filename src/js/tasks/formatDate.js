@@ -1,4 +1,4 @@
-import { addDays, format, isToday, toDate, formatDistance, formatRelative, parse, startOfDay, subDays, isThisWeek, isThisYear, differenceInYears } from 'date-fns'
+import { addDays, format, isToday, toDate, formatDistance, formatRelative, parse, startOfDay, subDays, isThisWeek, isThisYear, differenceInYears, differenceInCalendarDays, isTomorrow, isThisMonth, isPast } from 'date-fns'
 import {taskArray, addTask} from "./task"
 
 const chooseDate = (date) => {
@@ -29,15 +29,49 @@ const chooseDate = (date) => {
 };
 
 
+const findCorrectSection = (date) => {
+    const chosenDate = date.split('-');
+
+    // convert date from string to number
+    const year = Number(chosenDate[0]);
+    const month = Number(chosenDate[1]) - 1;
+    const day = Number(chosenDate[2]);
+    const reformattedDate = new Date(year, month, day);
+
+    const CurrentDate = new Date();
+
+    if(date === "" || date === undefined || date === 'No Date') {
+        const noDate = document.querySelector('[data-date-list="noDate"]')
+        return noDate;
+    } else if(isPast(reformattedDate)) {
+        const overdue = document.querySelector('[data-date-list="overdue"]')
+        return overdue;
+    } else if(isToday(reformattedDate)) {
+        const today = document.querySelector('[data-date-list="today"]')
+        return today;
+    } else if(isTomorrow(reformattedDate)) {
+        const tomorrow = document.querySelector('[data-date-list="tomorrow"]')
+        return tomorrow;
+    } else if(isThisWeek(reformattedDate, { weekStartsOn: 1 })) {
+        const week = document.querySelector('[data-date-list="week"]')
+        return week;
+    } else if(isThisMonth(reformattedDate)) {
+        const month = document.querySelector('[data-date-list="month"]')
+        return month;
+    } else if(!isThisMonth(reformattedDate) && !isPast(reformattedDate)) {
+        const someday = document.querySelector('[data-date-list="someday"]')
+        return someday;
+    } 
+}
+
 window.addEventListener('load', (e) => {
     const CurrentDate = new Date();
-    const dateSection = document.querySelector('[data-date="today"]')
-    console.log(dateSection)
+    const dateSection = document.querySelector('[data-date-list="today"]')
     taskArray.forEach(el => {
         console.log(el)
         (chooseDate(el.date));
     })
 })
 
-export {chooseDate};
+export {chooseDate, findCorrectSection};
 

@@ -2,6 +2,7 @@ import { getUnixTime } from "date-fns";
 import * as htmlTag from "../html-tags";
 import {showForm, formLocation, addTaskButton} from "./showForm";
 import Task from "./taskConstructor";
+import {findCorrectSection} from "./formatDate"
 
 
 // window.setTimeout(() => {addTask.create("michael", "today")
@@ -34,10 +35,8 @@ const editTask = (TheTaskObject) => {
 };
 
 const createObject = (id, title, date) => {
-    const form_wrapper = formLocation.get_Info().newForm;
-    const dateSection = formLocation.get_Info().dateSection;
-    
-
+    const dateSection = findCorrectSection(date);
+    const lastChild = dateSection.lastElementChild;
     const newTask = document.createElement('li');
     newTask.dataset.id = id;
     newTask.classList.add('task_list_item');
@@ -51,7 +50,7 @@ const createObject = (id, title, date) => {
 
     //apending the class to webpage
     newTask.appendChild(taskHTML);
-    dateSection.insertBefore(newTask, form_wrapper)
+    dateSection.insertBefore(newTask, lastChild)
 }
 
 
@@ -114,12 +113,7 @@ const hideSection = (e, condition) => {
         completedList.style.display='block'
     } 
 }
-const unmarkTask = (e) => {
 
-}
-const dragTask = (() => {
-
-})()
 
 
 export {addTask, taskArray, deleteTask, markCompleteTask, hideSection, getTask, editTask};

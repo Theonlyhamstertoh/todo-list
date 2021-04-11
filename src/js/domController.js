@@ -2,14 +2,16 @@ import {showForm, addTaskButton, formLocation} from "./tasks/showForm";
 import {addTask, taskArray, getTask, deleteTask, markCompleteTask, hideSection} from "./tasks/task";
 
 const buttonHandler = (e) => {
-
-    if(e.target.classList.contains("plus_add_button")) {
+    const showTask = () => {
         if(showForm.getIsEditModeEnable()) {
             const previousObject = formLocation.get_Info().theElementObject;
             addTask.create(previousObject.theTitle, previousObject.date);
             showForm.updateIsEditModeEnable(false);
             showForm.remove();
         }
+    }
+    if(e.target.classList.contains("plus_add_button")) {
+        showTask();
         if(showForm.getIsFormEnabled() === true) {
             showForm.remove();
             addTaskButton.create(formLocation.get_Info().dateSection);
@@ -23,12 +25,8 @@ const buttonHandler = (e) => {
     }
 
     if(e.target.classList.contains('edit_icon')) {
-        if(showForm.getIsEditModeEnable()) {
-            const previousObject = formLocation.get_Info().theElementObject;
-            addTask.create(previousObject.theTitle, previousObject.date);
-            showForm.updateIsEditModeEnable(false);
-            showForm.remove();
-        }
+        showTask();
+
 
         const theElementObject = getTask(e); 
         const theElement = e.target.parentNode.parentNode;
@@ -49,6 +47,14 @@ const buttonHandler = (e) => {
         theElement.remove();
     }
     if(e.target.classList.contains('task-heading')) {
+        const dateSection = e.target.nextElementSibling;
+        console.log(dateSection)
+        showForm.updateIsEditModeEnable(false);
+        showForm.remove();
+        if(dateSection.querySelector('.plus_add_button') === null) {
+            addTaskButton.create(dateSection);
+        }
+
         const showIcon = e.target.querySelector('.show_completed_task_icon');
         if(showIcon.style.transform === "rotate(90deg)") {
             showIcon.style.transform = 'rotate(270deg)';
@@ -76,6 +82,34 @@ const buttonHandler = (e) => {
         markCompleteTask(e);
     }
 
+    if(e.target.classList.contains('list-sort')) {
+        switch(e.target.textContent) {
+            case "Show All": 
+                e.target.textContent = 'Show Overdue';
+                break;
+            case "Show Overdue":
+                e.target.textContent = 'Show Today';
+                break;
+            case "Show Today":
+                e.target.textContent = 'Show Tomorrow';
+                break;
+            case "Show Tomorrow":
+                e.target.textContent = 'Show This Week'
+                break;
+            case "Show This Week":
+                e.target.textContent = 'Show This Month'
+                break;
+            case "Show This Month":
+                e.target.textContent = 'Show Someday'
+                break;
+            case "Show Someday":
+                e.target.textContent = 'Show Completed'
+                break;
+            default: 
+               e.target.textContent = 'Show All'
+                break;
+        }
+    }
 }
 window.addEventListener('click', buttonHandler, false);
 
