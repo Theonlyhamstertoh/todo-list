@@ -25,8 +25,6 @@ const form = `
 </div>
 </div>
 
-
-
 <div class='form_bottom'>
 <input type="button" data-key='Enter' id='form_add_button' class='button-style1' value='Add Task'>
 <input type="button" data-key='Escape id='form_cancel_button' class='button-style2' value='Cancel'>

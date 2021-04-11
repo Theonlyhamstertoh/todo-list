@@ -104,8 +104,6 @@ const showForm = (() => {
                 editTask(theElementObject);
                 remove();
             });
-
-            
         } else {
             form_cancel_button.addEventListener("click", () => {
                 remove();
@@ -124,7 +122,6 @@ const showForm = (() => {
         })
 
     }
-
 
     const addTaskButtonHandler = () => {
         const task_title = document.querySelector('.form_title');
