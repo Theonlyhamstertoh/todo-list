@@ -10,10 +10,25 @@
         <div class='list-container'>
           <div class='list-nav'>
             <h1 class="list-heading">To Do list</h1>
-            <div class='list-sort'>Sort by</div>
+            <div class='list-sort'>Show All</div>
           </div>
 
           <div class='list-content'>
+            <div data-date="nodate">
+              <div class="section-wrapper">
+                <h2  class='task-heading'>
+                  <span class="section-title">Quick Tasks</span>
+                  <span class="show_completed_task_icon">&#171;</span>
+                </h2>
+                <ul data-date-list="noDate" class='task_list'>
+                  <li class='plus_add_button'>
+                    <img class='plus-icon' src='/src/images/plus.svg'>
+                    <div class='item_title add_task'>Add task</div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
             <!--overdue -->
             <div data-date='overdue'>
               <div class='section-wrapper'>
@@ -129,7 +144,7 @@
               </div>
             </div>
 
-            <div data-type="completed">
+            <div data-date="completed">
               <div class="section-wrapper">
                 <h2 class='task-heading' >
                   <span class="section-title">Completed</span>
