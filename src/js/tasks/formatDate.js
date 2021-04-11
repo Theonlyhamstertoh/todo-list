@@ -14,10 +14,12 @@ const chooseDate = (date) => {
     const CurrentDate = new Date();
     //  if date equals to yesterday, or two days ago, say that. Say three days, four days ago. 
 
-    if(isToday(reformattedDate)) {
+    if(isPast(reformattedDate)) {
+        const overdue = formatDistance(reformattedDate, CurrentDate, {addSuffix: true})
+        return overdue; 
+    } else if(isToday(reformattedDate)) {
         return "Today";
-    }
-    if(isThisWeek(reformattedDate, { weekStartsOn: 1 })) {
+    } else if(isThisWeek(reformattedDate, { weekStartsOn: 1 })) {
         const within_week = format(new Date(year, month, day), "EEEE");
         return within_week
     } else if(isThisYear(reformattedDate)) {
@@ -59,18 +61,12 @@ const findCorrectSection = (date) => {
         const month = document.querySelector('[data-date-list="month"]')
         return month;
     } else if(!isThisMonth(reformattedDate) && !isPast(reformattedDate)) {
-        const someday = document.querySelector('[data-date-list="someday"]')
+        const someday = document.querySelector('[data-date-list="someday"]');
+        console.log(someday)
         return someday;
     } 
 }
 
-window.addEventListener('click', () => {
-    // const CurrentDate = new Date();
-    // console.log(taskArray)
-    // taskArray.forEach(el => {
-
-    // })
-})
 
 export {chooseDate, findCorrectSection};
 

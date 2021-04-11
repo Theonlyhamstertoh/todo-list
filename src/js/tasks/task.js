@@ -3,7 +3,7 @@ import * as htmlTag from "../html-tags";
 import {showForm, formLocation, addTaskButton} from "./showForm";
 import Task from "./taskConstructor";
 import {findCorrectSection} from "./formatDate"
-import { storage } from "../storage";
+import { storage, changeLayout } from "../storage";
 
 
 
@@ -50,6 +50,7 @@ const createObject = (id, title, date, completed) => {
     newTask.dataset.id = id;
     newTask.classList.add('task_list_item');
 
+
     const taskHTML = document.createRange()
         .createContextualFragment(
             htmlTag.task(
@@ -60,10 +61,15 @@ const createObject = (id, title, date, completed) => {
     //apending the class to webpage
     newTask.appendChild(taskHTML);
 
+    const dateCSS = newTask.querySelector('.item_due') ;
+    if(date !== undefined && date !== '' && date !== "No Date") {
+        dateCSS.style.padding = "3px 10px";        
+    } else {
+        dateCSS.style.padding = '';
+    }
     countOfCompleted = 0;
     taskArray.forEach(el => {
         if(el.completed === true) {
-            console.log(el)
             countOfCompleted++;
         }
     })
@@ -85,7 +91,7 @@ const createObject = (id, title, date, completed) => {
     }
 
    
-
+    changeLayout();
     storage.saveLocal();
 }
 

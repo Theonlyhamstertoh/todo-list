@@ -1,6 +1,8 @@
 @use "var";
 @use "mixin";
 
+
+
 .list-container {
     padding: 0px 100px 100px 100px;
     height: 100%;
@@ -124,7 +126,13 @@
         gap: 2px;
 
         .item_due {
+            font-size: .7em;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
             margin-right: 7px;
+            background-color: var.$plusIcon-color;
+            border-radius: 50px;
         }
         .edit_icon {
             width: 20px;

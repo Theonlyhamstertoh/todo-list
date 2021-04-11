@@ -31,6 +31,7 @@ const addTaskButton = `
 `
 
 const task = (title, date) => {
+
   const taskHTML = `
       <div class='item_check'><span class='checkmark'>&#10003;</span></div>
       <div class='item_title'>${title}</div>

@@ -1,6 +1,32 @@
 
-@media (max-width: 610px) {
+@use "mixin";
+@media (max-width: 800px) {
     .list-container {
-        padding: 0 50px 100px 25px !important;
+        padding: 0 30px 100px 30px !important;
     }
+
+    .task_list_item {
+        height: 100%;
+        gap: 10px;
+    
+        > .item_title {
+            width: 100%;
+            height: 100%;
+            overflow: initial;
+            overflow-x: hidden;
+            padding-right: 20px;
+        }
+        justify-content: initial;
+        align-items: flex-start;
+
+        .item_due {
+            font-size: .7em;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+
+        }
+    }
+
+
 }

@@ -1,6 +1,6 @@
 import {showForm, addTaskButton, formLocation} from "./tasks/showForm";
 import {addTask, taskArray, editTask, getTask, deleteTask, markCompleteTask, hideSection} from "./tasks/task";
-import {storage} from "./storage"
+import {storage, changeLayout} from "./storage"
 import {sort} from "./tasks/sort";
 
 const showTask = () => {
@@ -23,6 +23,7 @@ const buttonHandler = (e) => {
         }
         showForm.create(e.target.parentNode);
         addTaskButton.remove(e.target);
+        changeLayout();
     }
 
     if(e.target.classList.contains('delete_icon')) {
@@ -50,6 +51,8 @@ const buttonHandler = (e) => {
         showForm.updateIsEditModeEnable(true);
         showForm.create(dateSection, theElement, theElementObject);
         theElement.remove();
+        changeLayout();
+
     }
     if(e.target.classList.contains('task-heading')) {
         const dateSection = e.target.nextElementSibling;
@@ -163,9 +166,8 @@ window.addEventListener('click', buttonHandler, false);
 
 
 
-
-
-
+console.log(window.innerHeight)
+console.log(window.innerWidth)
 
 
 export {buttonHandler};
