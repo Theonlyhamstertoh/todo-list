@@ -23,6 +23,7 @@ const showForm = (() => {
     const create = (dateSection, editElement, theElementObject) => {
         const newForm = document.createElement('li');
         newForm.classList.add('form_wrapper');
+        newForm.dataset.type='form';
         
         // add the HTML and append to the newForm 
         const formHTML = document.createRange().createContextualFragment(htmlTag.form);
@@ -209,7 +210,6 @@ const detectKeyPress = (e) => {
     } else if(e.key === 'Enter' && task_title.value.length > 0 ) {
         const theElementObject = formLocation.get_Info().theElementObject;
         if(theElementObject !== undefined) {
-            console.log(theElementObject)
             theElementObject.theTitle =task_title.value;
             theElementObject.date =dateInput.value;
             showForm.updateIsEditModeEnable(false);

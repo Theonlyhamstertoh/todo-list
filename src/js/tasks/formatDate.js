@@ -1,6 +1,6 @@
-import { addDays, format, isToday, toDate, formatDistance, formatRelative, parse, startOfDay, subDays, isThisWeek, isThisYear, differenceInYears, differenceInCalendarDays, isTomorrow, isThisMonth, isPast } from 'date-fns'
-import {taskArray, addTask} from "./task"
-
+import { addDays, format, isToday, toDate, formatDistance, formatRelative, parse, startOfDay, subDays, isThisWeek, isThisYear, differenceInYears, differenceInCalendarDays, isTomorrow, isThisMonth, isPast } from 'date-fns';
+import {taskArray, addTask} from "./task";
+import {showForm} from "./showForm";
 const chooseDate = (date) => {
     if(date === "" || date === 'No Date') return "";
     const chosenDate = date.split('-');
@@ -12,6 +12,7 @@ const chooseDate = (date) => {
     const reformattedDate = new Date(year, month, day);
 
     const CurrentDate = new Date();
+    //  if date equals to yesterday, or two days ago, say that. Say three days, four days ago. 
 
     if(isToday(reformattedDate)) {
         return "Today";
@@ -36,10 +37,8 @@ const findCorrectSection = (date) => {
     const year = Number(chosenDate[0]);
     const month = Number(chosenDate[1]) - 1;
     const day = Number(chosenDate[2]);
-    const reformattedDate = new Date(year, month, day);
-
+    const reformattedDate = new Date(year, month, day, 23, 59, 59);
     const CurrentDate = new Date();
-
     if(date === "" || date === undefined || date === 'No Date') {
         const noDate = document.querySelector('[data-date-list="noDate"]')
         return noDate;
@@ -64,13 +63,12 @@ const findCorrectSection = (date) => {
     } 
 }
 
-window.addEventListener('load', (e) => {
-    const CurrentDate = new Date();
-    const dateSection = document.querySelector('[data-date-list="today"]')
-    taskArray.forEach(el => {
-        console.log(el)
-        (chooseDate(el.date));
-    })
+window.addEventListener('click', () => {
+    // const CurrentDate = new Date();
+    // console.log(taskArray)
+    // taskArray.forEach(el => {
+
+    // })
 })
 
 export {chooseDate, findCorrectSection};

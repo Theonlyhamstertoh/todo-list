@@ -1,16 +1,19 @@
 import {showForm, addTaskButton, formLocation} from "./tasks/showForm";
 import {addTask, taskArray, getTask, deleteTask, markCompleteTask, hideSection} from "./tasks/task";
-
+import {localStorage} from "./storage"
+import {sort} from "./tasks/sort";
 const buttonHandler = (e) => {
     const showTask = () => {
         if(showForm.getIsEditModeEnable()) {
             const previousObject = formLocation.get_Info().theElementObject;
+
             addTask.create(previousObject.theTitle, previousObject.date);
             showForm.updateIsEditModeEnable(false);
             showForm.remove();
         }
     }
     if(e.target.classList.contains("plus_add_button")) {
+
         showTask();
         if(showForm.getIsFormEnabled() === true) {
             showForm.remove();
@@ -25,12 +28,11 @@ const buttonHandler = (e) => {
     }
 
     if(e.target.classList.contains('edit_icon')) {
-        showTask();
-
-
         const theElementObject = getTask(e); 
         const theElement = e.target.parentNode.parentNode;
         const dateSection = e.target.parentNode.parentNode.parentNode;
+
+        showTask();
 
         if(dateSection.querySelector('.plus_add_button') === null) {
             addTaskButton.create(dateSection);
@@ -83,32 +85,55 @@ const buttonHandler = (e) => {
     }
 
     if(e.target.classList.contains('list-sort')) {
-        switch(e.target.textContent) {
-            case "Show All": 
-                e.target.textContent = 'Show Overdue';
-                break;
-            case "Show Overdue":
-                e.target.textContent = 'Show Today';
-                break;
-            case "Show Today":
-                e.target.textContent = 'Show Tomorrow';
-                break;
-            case "Show Tomorrow":
-                e.target.textContent = 'Show This Week'
-                break;
-            case "Show This Week":
-                e.target.textContent = 'Show This Month'
-                break;
-            case "Show This Month":
-                e.target.textContent = 'Show Someday'
-                break;
-            case "Show Someday":
-                e.target.textContent = 'Show Completed'
-                break;
-            default: 
-               e.target.textContent = 'Show All'
-                break;
-        }
+        e.target.textContent = changeSortType(e);
+  
+
+    }
+}
+
+const changeSortType = (e) => {
+    const allSections = document.querySelectorAll("[data-date]")
+     
+    allSections.forEach(el => {
+        el.style.display = 'none'
+    })
+
+    switch(e.target.textContent) {
+        case "Show All": 
+            const overdue = document.querySelector('[data-date="overdue"]')
+            overdue.style.display = 'block'
+            return 'Show Overdue';
+        case "Show Overdue":
+            const today = document.querySelector('[data-date="today"]')
+            today.style.display = 'block'
+            return 'Show Today';
+        case "Show Today":
+            const tomorrow = document.querySelector('[data-date="tomorrow"]')
+            tomorrow.style.display = 'block'
+
+            return 'Show Tomorrow';
+        case "Show Tomorrow":
+            const week = document.querySelector('[data-date="week"]')
+            week.style.display = 'block'
+            return 'Show This Week'
+        case "Show This Week":
+            const month = document.querySelector('[data-date="month"]')
+            month.style.display = 'block'
+
+            return 'Show This Month'
+        case "Show This Month":
+            const someday = document.querySelector('[data-date="someday"]')
+            someday.style.display = 'block'
+            return 'Show Someday'
+        case "Show Someday":
+            const completed = document.querySelector('[data-date="completed"]')
+            completed.style.display = 'block';
+            return 'Show Completed'
+        default: 
+        allSections.forEach(el => {
+            el.style.display = 'block'
+        }) 
+           return 'Show All'
     }
 }
 window.addEventListener('click', buttonHandler, false);

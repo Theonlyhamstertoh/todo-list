@@ -4,15 +4,15 @@ import {showForm, formLocation, addTaskButton} from "./showForm";
 import Task from "./taskConstructor";
 import {findCorrectSection} from "./formatDate"
 
-
-// window.setTimeout(() => {addTask.create("michael", "today")
-// addTask.create("michael", "today")
-// addTask.create("michael", "today")
-// addTask.create("michael", "today")
-// addTask.create("michael", "today")
-// addTask.create("michael", "today")
-// addTask.create("michael", "today")
-// })
+window.setTimeout(() => {
+    addTask.create("michael", "2021-04-11")
+    addTask.create("michael", "2021-04-11")
+    addTask.create("michael", "2021-04-11")
+    addTask.create("michael", "2021-04-11")
+    addTask.create("michael", "2021-04-11")
+    addTask.create("michael", "2021-04-11")
+    addTask.create("michael", "2021-04-11")
+}, 100)
 
 const taskArray = [];
 const addTask = (() => {
@@ -23,6 +23,8 @@ const addTask = (() => {
         const newTaskObject = new Task(task_title, date_input);
         taskArray.push(newTaskObject);
         createObject(newTaskObject.id, newTaskObject.title, newTaskObject.date);
+
+
     }
 
 
@@ -32,11 +34,16 @@ const addTask = (() => {
 })()
 const editTask = (TheTaskObject) => {
     createObject(TheTaskObject.id, TheTaskObject.theTitle, TheTaskObject.date);
+
 };
 
 const createObject = (id, title, date) => {
     const dateSection = findCorrectSection(date);
-    const lastChild = dateSection.lastElementChild;
+    let appendBeforeThisChild = dateSection.lastElementChild;
+    if(showForm.getIsFormEnabled() && dateSection.querySelector('.form_wrapper') !== null) {
+        appendBeforeThisChild = dateSection.querySelector('.form_wrapper');
+    }
+
     const newTask = document.createElement('li');
     newTask.dataset.id = id;
     newTask.classList.add('task_list_item');
@@ -50,7 +57,10 @@ const createObject = (id, title, date) => {
 
     //apending the class to webpage
     newTask.appendChild(taskHTML);
-    dateSection.insertBefore(newTask, lastChild)
+    if(showForm.getIsEditModeEnable()) {
+    } else {
+        dateSection.insertBefore(newTask, appendBeforeThisChild)
+    }
 }
 
 
