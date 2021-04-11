@@ -1,6 +1,6 @@
 import {showForm, addTaskButton, formLocation} from "./tasks/showForm";
-import {addTask, taskArray, getTask, deleteTask, markCompleteTask, hideSection} from "./tasks/task";
-import {localStorage} from "./storage"
+import {addTask, taskArray, editTask, getTask, deleteTask, markCompleteTask, hideSection} from "./tasks/task";
+import {storage} from "./storage"
 import {sort} from "./tasks/sort";
 const buttonHandler = (e) => {
     const showTask = () => {
@@ -50,10 +50,9 @@ const buttonHandler = (e) => {
     }
     if(e.target.classList.contains('task-heading')) {
         const dateSection = e.target.nextElementSibling;
-        console.log(dateSection)
         showForm.updateIsEditModeEnable(false);
         showForm.remove();
-        if(dateSection.querySelector('.plus_add_button') === null) {
+        if(dateSection.querySelector('.plus_add_button') === null && dateSection.dataset.dateList !== "completed") {
             addTaskButton.create(dateSection);
         }
 
@@ -73,15 +72,24 @@ const buttonHandler = (e) => {
             e.target.style.backgroundColor = '';
             e.target.childNodes[0].style.display = 'none';
             e.target.nextElementSibling.style.textDecoration = 'none';
-            return;
         }
         e.target.style.backgroundColor = 'rgba(168, 83, 83, 0.5)';
         e.target.childNodes[0].style.display = 'block';
         e.target.nextElementSibling.style.textDecoration = 'line-through';
 
+        const theElementObject = getTask(e, true); 
+        const theElement = e.target.parentNode;
+        const editButton = theElement.childNodes[5].childNodes[3];
+        editButton.style.pointerEvents = "none";
+        if(theElementObject.completedTask === true) {
+            theElementObject.completedTask = false;
+            editTask(theElementObject);
+            theElement.remove();
 
-     
-        markCompleteTask(e);
+        } else {
+            markCompleteTask(e);
+        }
+        
     }
 
     if(e.target.classList.contains('list-sort')) {

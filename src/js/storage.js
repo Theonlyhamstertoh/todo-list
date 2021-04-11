@@ -1,5 +1,13 @@
-const localStorage = (() => {
-    console.log('yes')
+import {taskArray} from "./tasks/task"
+
+
+const storage = (() => {
+    const saveLocal = () => {
+        localStorage.setItem('tasks', JSON.stringify(taskArray))
+    }
+
+    return {saveLocal}
 })();
 
-export {localStorage};
+
+export {storage};
