@@ -51,6 +51,7 @@ const changeLayout = () => {
     } else {
         allTasks.forEach(task => {
             task.style.flexDirection = "row";
+            task.style.paddingRight = "10px";
         })
     }
 }
