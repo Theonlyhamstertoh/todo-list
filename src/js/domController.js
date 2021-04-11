@@ -2,16 +2,18 @@ import {showForm, addTaskButton, formLocation} from "./tasks/showForm";
 import {addTask, taskArray, editTask, getTask, deleteTask, markCompleteTask, hideSection} from "./tasks/task";
 import {storage} from "./storage"
 import {sort} from "./tasks/sort";
-const buttonHandler = (e) => {
-    const showTask = () => {
-        if(showForm.getIsEditModeEnable()) {
-            const previousObject = formLocation.get_Info().theElementObject;
 
-            addTask.create(previousObject.theTitle, previousObject.date);
-            showForm.updateIsEditModeEnable(false);
-            showForm.remove();
-        }
+const showTask = () => {
+    if(showForm.getIsEditModeEnable()) {
+        const previousObject = formLocation.get_Info().theElementObject;
+        addTask.create(previousObject.theTitle, previousObject.date);
+        showForm.updateIsEditModeEnable(false);
+        showForm.remove();
     }
+}
+
+const buttonHandler = (e) => {
+  
     if(e.target.classList.contains("plus_add_button")) {
 
         showTask();
@@ -34,6 +36,7 @@ const buttonHandler = (e) => {
 
         showTask();
 
+        console.log(theElementObject, theElement, dateSection)
         if(dateSection.querySelector('.plus_add_button') === null) {
             addTaskButton.create(dateSection);
         }
@@ -68,27 +71,34 @@ const buttonHandler = (e) => {
         }
     }
     if(e.target.classList.contains('item_check')) {
+        const theElementObject = getTask(e, true); 
+        const theElement = e.target.parentNode;
+        const editButton = theElement.childNodes[5].childNodes[3];
+
         if(e.target.childNodes[0].style.display === 'block') {
             e.target.style.backgroundColor = '';
             e.target.childNodes[0].style.display = 'none';
             e.target.nextElementSibling.style.textDecoration = 'none';
+            editButton.style.pointerEvents = "all";
+            if(theElementObject.completed === true) {
+                theElementObject.completed= false;
+                editTask(theElementObject);
+
+                theElement.remove();
+    
+            }
+            return;
         }
         e.target.style.backgroundColor = 'rgba(168, 83, 83, 0.5)';
         e.target.childNodes[0].style.display = 'block';
         e.target.nextElementSibling.style.textDecoration = 'line-through';
 
-        const theElementObject = getTask(e, true); 
-        const theElement = e.target.parentNode;
-        const editButton = theElement.childNodes[5].childNodes[3];
+        theElementObject.completed = true;
         editButton.style.pointerEvents = "none";
-        if(theElementObject.completedTask === true) {
-            theElementObject.completedTask = false;
-            editTask(theElementObject);
-            theElement.remove();
 
-        } else {
-            markCompleteTask(e);
-        }
+        markCompleteTask(e);
+
+        
         
     }
 
@@ -108,6 +118,10 @@ const changeSortType = (e) => {
 
     switch(e.target.textContent) {
         case "Show All": 
+            const quickTasks = document.querySelector('[data-date="nodate"]')
+            quickTasks.style.display = 'block'
+            return 'Quick Tasks';
+        case "Quick Tasks": 
             const overdue = document.querySelector('[data-date="overdue"]')
             overdue.style.display = 'block'
             return 'Show Overdue';

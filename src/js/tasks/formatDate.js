@@ -2,7 +2,7 @@ import { addDays, format, isToday, toDate, formatDistance, formatRelative, parse
 import {taskArray, addTask} from "./task";
 import {showForm} from "./showForm";
 const chooseDate = (date) => {
-    if(date === "" || date === 'No Date') return "";
+    if(date === "" || date === 'No Date' || date === undefined) return "";
     const chosenDate = date.split('-');
 
     // convert date from string to number
@@ -31,6 +31,10 @@ const chooseDate = (date) => {
 
 
 const findCorrectSection = (date) => {
+    if(date === "" || date === undefined || date === 'No Date') {
+        const noDate = document.querySelector('[data-date-list="noDate"]')
+        return noDate;
+    } 
     const chosenDate = date.split('-');
 
     // convert date from string to number
@@ -39,10 +43,7 @@ const findCorrectSection = (date) => {
     const day = Number(chosenDate[2]);
     const reformattedDate = new Date(year, month, day, 23, 59, 59);
     const CurrentDate = new Date();
-    if(date === "" || date === undefined || date === 'No Date') {
-        const noDate = document.querySelector('[data-date-list="noDate"]')
-        return noDate;
-    } else if(isPast(reformattedDate)) {
+    if(isPast(reformattedDate)) {
         const overdue = document.querySelector('[data-date-list="overdue"]')
         return overdue;
     } else if(isToday(reformattedDate)) {

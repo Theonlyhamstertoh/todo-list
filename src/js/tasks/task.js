@@ -5,15 +5,7 @@ import Task from "./taskConstructor";
 import {findCorrectSection} from "./formatDate"
 import { storage } from "../storage";
 
-window.setTimeout(() => {
-    addTask.create("michael", "2021-04-11")
-    addTask.create("michael", "2021-04-11")
-    addTask.create("michael", "2021-04-11")
-    addTask.create("michael", "2021-04-11")
-    addTask.create("michael", "2021-04-11")
-    addTask.create("michael", "2021-04-11")
-    addTask.create("michael", "2021-04-11")
-}, 100)
+
 
 const taskArray = [];
 const addTask = (() => {
@@ -32,11 +24,22 @@ const addTask = (() => {
     }
 })()
 const editTask = (TheTaskObject) => {
-    createObject(TheTaskObject.id, TheTaskObject.theTitle, TheTaskObject.date);
+    createObject(TheTaskObject.id, TheTaskObject.title, TheTaskObject.date);
 
 };
 
-const createObject = (id, title, date) => {
+const count = () => {
+    countOfCompleted = 0;
+    taskArray.forEach(el => {
+        if(el.completed === true) {
+            console.log(el)
+            countOfCompleted++;
+        }
+    })
+    const completedTaskCount = document.querySelector('.total_completed_tasks');
+    completedTaskCount.textContent = `(${countOfCompleted})`;
+}
+const createObject = (id, title, date, completed) => {
     const dateSection = findCorrectSection(date);
     let appendBeforeThisChild = dateSection.lastElementChild;
     if(showForm.getIsFormEnabled() && dateSection.querySelector('.form_wrapper') !== null) {
@@ -56,10 +59,33 @@ const createObject = (id, title, date) => {
 
     //apending the class to webpage
     newTask.appendChild(taskHTML);
-    if(showForm.getIsEditModeEnable()) {
+
+    countOfCompleted = 0;
+    taskArray.forEach(el => {
+        if(el.completed === true) {
+            console.log(el)
+            countOfCompleted++;
+        }
+    })
+    const completedTaskCount = document.querySelector('.total_completed_tasks');
+    completedTaskCount.textContent = `(${countOfCompleted})`;
+
+    if(completed === true) {
+        const checkbutton = newTask.querySelector('.item_check');
+        const deleteButton = newTask.querySelector('.edit_icon');
+        deleteButton.style.pointerEvents = 'none';
+        checkbutton.style.backgroundColor = 'rgba(168, 83, 83, 0.5)';
+        checkbutton.childNodes[0].style.display = 'block';
+        checkbutton.nextElementSibling.style.textDecoration = 'line-through';
+        const completedSection = document.querySelector('[data-date-list="completed"]')
+        completedSection.appendChild(newTask)
+
     } else {
         dateSection.insertBefore(newTask, appendBeforeThisChild)
     }
+
+   
+
     storage.saveLocal();
 }
 
@@ -75,8 +101,7 @@ const deleteTask = (e) => {
     const completedTaskCount = document.querySelector('.total_completed_tasks');
     countOfCompleted = 0;
     taskArray.forEach(el => {
-        if(el.completedTask === true) {
-            console.log(el)
+        if(el.completed === true) {
             countOfCompleted++;
         }
     })
@@ -105,22 +130,20 @@ const markCompleteTask = (e) => {
     const completedSection = document.querySelector('[data-date-list="completed"]')
     const completedTaskCount = document.querySelector('.total_completed_tasks');
     const completedItem = e.target.parentNode;
+
     countOfCompleted = 0;
     taskArray.forEach(el => {
-        if(el.id === e.target.parentNode.dataset.id) {
-            el.completed = true;
+        if(el.completed === true) {
             countOfCompleted++;
         }
     })
     completedTaskCount.textContent = `(${countOfCompleted})`;
+
     completedSection.appendChild(completedItem);
     storage.saveLocal();
 
 };
 
-const unmarkCompleteTask = (e) => {
-
-}
 
 const hideSection = (e, condition) => {
     const completedList = e.target.parentNode.childNodes[3];
@@ -134,4 +157,4 @@ const hideSection = (e, condition) => {
 
 
 
-export {addTask, taskArray, deleteTask, markCompleteTask, hideSection, getTask, editTask};
+export {addTask, taskArray, createObject, count, deleteTask, markCompleteTask, hideSection, getTask, editTask};

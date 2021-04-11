@@ -3,11 +3,11 @@ import * as htmlTag from "../html-tags";
 import { chooseDate } from "./formatDate";
 
 class Task {
-    constructor(theTitle, dueDate) {
+    constructor(theTitle, dueDate, completed = false) {
         this.id = (((1+Math.random())*0x10000)|0).toString(16).substring(1);
         this.title = theTitle;
         this.dueDate = dueDate;
-        this.completed = false;
+        this.completed = completed;
     }
     set completedTask(newValue) {
         this.completed = newValue;
